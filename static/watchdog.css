@@ -1,0 +1,21 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  font-size: 128px;
+}
+
+a {
+  color:white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: yellow;
+}
+
+a:visited {
+  color: gray;
+}
