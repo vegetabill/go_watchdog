@@ -8,11 +8,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
     </script>
 
-    <h1 id="time_since_last_green_build">
-      <%= watchdog.time_since_last_green_build %>
-    </h1>
+    <div id="pupmoticon">
+      <h1 id="time_since_last_green_build">
+        <%= watchdog.time_since_last_green_build %>
+      </h1>
 
-    <h2>since last green installer</h2>
+      <h2>since last green installer</h2>
+    </div>
+
 
     <div id="foot">
       <p><a href="https://github.com/rearadmiral/go_watchdog">Go Watchdog</a></p>
@@ -23,9 +26,7 @@
         setInterval(function() {
           $.ajax({
               url: "/time",
-              success: function(timeSinceLastGreenBuild) {
-                  $("#time_since_last_green_build").text(timeSinceLastGreenBuild);
-              }
+              success: function(js) { eval(js); }
             });
         }, 10000);
       });

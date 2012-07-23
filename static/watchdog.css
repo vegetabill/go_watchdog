@@ -3,7 +3,30 @@ body {
   color: white;
 }
 
+.pupmoticon {
+  height: 1028px;
+  width: 768px;
+  margin: 10px;
+  border: 5px solid white;
+  border-radius: 15px;
+}
+
+.angry {
+  border: 5px solid red;
+  background-image: url('angry.jpg');
+}
+
+.happy {
+  background-image: url('happy.jpg');
+}
+
+.neutral {
+  background-image: url('neutral.jpg');
+}
+
+
 h1 {
+  text-shadow: 5px 5px black;
   font-size: 128px;
 }
 
