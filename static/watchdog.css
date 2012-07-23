@@ -6,6 +6,10 @@ body {
   background-repeat: no-repeat;
 }
 
+.enraged {
+  background-image: url('enraged.jpg');
+}
+
 .angry {
   background-image: url('angry.jpg');
 }

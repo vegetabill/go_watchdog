@@ -33,6 +33,7 @@ class GoWatchdog
   
   def mood
     minutes = minutes_ago(last_green_build_time)
+    return "enraged" if minutes > (36*60)
     return "angry" if minutes > (24*60)
     return "neutral" if minutes > 120
     "happy"
