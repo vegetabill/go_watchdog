@@ -1,18 +1,11 @@
 body {
   background-color: black;
   color: white;
-}
-
-.pupmoticon {
-  height: 1028px;
-  width: 768px;
-  margin: 10px;
-  border: 5px solid white;
-  border-radius: 15px;
+  margin: 0;
+  font-family: 'Gorditas', cursive;
 }
 
 .angry {
-  border: 5px solid red;
   background-image: url('angry.jpg');
 }
 
@@ -24,21 +17,55 @@ body {
   background-image: url('neutral.jpg');
 }
 
-
-h1 {
-  text-shadow: 5px 5px black;
-  font-size: 128px;
+.dashboard {
+  margin: 50px 25px 0px 25px;
+  width: 75%;
+  padding: 0px 10px 0px 50px;
 }
 
+.happy .dashboard {
+  background-color: green;
+}
+
+.angry .dashboard {
+  background-color: red;
+  border: 10px solid white;
+  border-radius: 15px;
+}
+
+h1 {
+  text-shadow: 3px 3px black;
+  font-size: 128px;
+  padding-bottom: -65px;
+  margin: 20px 0px -25px 0px;
+}
+
+h2 {
+  text-shadow: 3px 3px black;
+  font-size: 64px; 
+}
+
+.footer {
+  background-color: black;
+  border-top: 1px solid #555;
+  color: #BBB;
+  margin: 0;
+  z-index: 10000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;  
+  font-weight: bold;
+  text-align: right;
+  padding: 2px 20px 2px 0px;
+}
+
+
 a {
-  color:white;
+  color: white;
   text-decoration: none;
 }
 
 a:hover {
   color: yellow;
-}
-
-a:visited {
-  color: gray;
 }

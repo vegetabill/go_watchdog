@@ -22,11 +22,11 @@ class GoWatchdog
   
   def hours_ago_in_words(time)
     if hours_ago(time) == 0
-      "less than an hour ago"
+      "less than an hour"
     elsif hours_ago(time) == 1
-      "1 hour ago"
+      "1 hour"
     else 
-      "#{hours_ago(time)} hours ago"
+      "#{hours_ago(time)} hours"
     end
   end
   
@@ -38,14 +38,17 @@ class GoWatchdog
   end
   
   def pipeline_timestamp
-    return @body if @body
-    http = Net::HTTP.new('go01.thoughtworks.com',443)
-    req = Net::HTTP::Get.new('/go/properties/GreenInstallers/latest/defaultStage/latest/defaultJob/cruise_timestamp_06_completed')
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    req.basic_auth 'mingle_builder2', ENV['GO_PASSWORD']
-    response = http.request(req)
-    @body = response.body
+    @body = "osito\n2012-07-20"
+    @body ||= begin
+      puts "retrieve"
+      http = Net::HTTP.new('go01.thoughtworks.com',443)
+      req = Net::HTTP::Get.new('/go/properties/GreenInstallers/latest/defaultStage/latest/defaultJob/cruise_timestamp_06_completed')
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      req.basic_auth 'mingle_builder2', ENV['GO_PASSWORD']
+      response = http.request(req)
+      @body = response.body
+    end
   end
   
 end
@@ -58,8 +61,8 @@ get '/time' do
   osito = GoWatchdog.new
 <<-JAVASCRIPT
  $("#time_since_last_green_build").text('#{osito.time_since_last_green_build}');
- $('#pupmoticon').removeClass('happy neutral angry');
- $('#pupmoticon').addClass('#{osito.mood}');
+ $('body').removeClass('happy neutral angry');
+ $('body').addClass('#{osito.mood}');
 JAVASCRIPT
 end
 
