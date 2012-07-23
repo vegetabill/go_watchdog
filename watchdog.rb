@@ -8,7 +8,7 @@ set :public_folder, File.dirname(__FILE__) + '/static'
 class GoWatchdog
   
   def time_since_last_green_build
-    hours_ago_in_words(last_green_build_time)
+    time_ago_in_words(last_green_build_time)
   end
   
   def last_green_build_time
@@ -16,29 +16,30 @@ class GoWatchdog
     DateTime.parse(value).to_time
   end
   
-  def hours_ago(time)
-    ((Time.now - time) / 60.0 / 60.0).floor
+  def minutes_ago(time)
+    (Time.now - time) / 60.0
   end
   
-  def hours_ago_in_words(time)
-    if hours_ago(time) == 0
-      "less than an hour"
-    elsif hours_ago(time) == 1
-      "1 hour"
+  def time_ago_in_words(time)
+    minutes = minutes_ago(time)
+    if minutes  < 60.0
+      "#{minutes.ceil} minutes ago"
+    elsif (60..120).include?(minutes)
+      "about an hour"
     else 
-      "#{hours_ago(time)} hours"
+      "#{(minutes/60.0).floor} hours"
     end
   end
   
   def mood
-    hours = hours_ago(last_green_build_time)
-    return "angry" if hours > 24
-    return "neutral" if hours > 2
+    minutes = minutes_ago(last_green_build_time)
+    return "angry" if minutes > (24*60)
+    return "neutral" if minutes > 120
     "happy"
   end
   
   def pipeline_timestamp
-    @body = "osito\n2012-07-20"
+    @body = "osito\n2012-07-22 18:10:00 PDT"
     @body ||= begin
       puts "retrieve"
       http = Net::HTTP.new('go01.thoughtworks.com',443)

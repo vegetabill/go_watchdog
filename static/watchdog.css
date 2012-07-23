@@ -3,6 +3,7 @@ body {
   color: white;
   margin: 0;
   font-family: 'Gorditas', cursive;
+  background-repeat: no-repeat;
 }
 
 .angry {
@@ -19,18 +20,7 @@ body {
 
 .dashboard {
   margin: 50px 25px 0px 25px;
-  width: 75%;
   padding: 0px 10px 0px 50px;
-}
-
-.happy .dashboard {
-  background-color: green;
-}
-
-.angry .dashboard {
-  background-color: red;
-  border: 10px solid white;
-  border-radius: 15px;
 }
 
 h1 {
