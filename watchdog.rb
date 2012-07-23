@@ -39,9 +39,7 @@ class GoWatchdog
   end
   
   def pipeline_timestamp
-    @body = "osito\n2012-07-22 18:10:00 PDT"
     @body ||= begin
-      puts "retrieve"
       http = Net::HTTP.new('go01.thoughtworks.com',443)
       req = Net::HTTP::Get.new('/go/properties/GreenInstallers/latest/defaultStage/latest/defaultJob/cruise_timestamp_06_completed')
       http.use_ssl = true
