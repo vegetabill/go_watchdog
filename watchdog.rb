@@ -1,85 +1,26 @@
 require 'sinatra'
-require 'net/http'
-require 'net/https'
+require 'yaml'
+$LOAD_PATH << 'lib'
+require 'go_watchdog'
 
-raise "Must supply Go password in env variable GO_PASSWORD" unless ENV['GO_PASSWORD']
 raise "Must supply Go username in env variable GO_USERNAME" unless ENV['GO_USERNAME']
+raise "Must supply Go password in env variable GO_PASSWORD" unless ENV['GO_PASSWORD']
+
 set :public_folder, File.dirname(__FILE__) + '/static'
 
-class GoWatchdog
-  
-  def time_since_last_green_build
-    time_ago_in_words(last_green_build_time)
-  end
-  
-  def last_green_build_time
-    value = pipeline_timestamp.strip.split("\n")[1]
-    DateTime.parse(value).to_time
-  end
-  
-  def minutes_ago(time)
-    (Time.now - time) / 60.0
-  end
-  
-  def time_ago_in_words(time)
-    minutes = minutes_ago(time)
-    if minutes  < 60.0
-      "#{minutes.ceil} minutes"
-    elsif (60..120).include?(minutes)
-      "about an hour"
-    else 
-      "#{(minutes/60.0).floor} hours"
-    end
-  end
-  
-  def mood
-    minutes = minutes_ago(last_green_build_time)
-    return "enraged" if minutes > (36*60)
-    return "angry" if minutes > (24*60)
-    return "neutral" if minutes > 120
-    "happy"
-  end
-  
-  def pipeline_timestamp
-    @body ||= begin
-      pipeline = YAML.load(File.read('config.yml'))['pipeline']
-      http = Net::HTTP.new(pipeline['host'], pipeline['port'])
-      req = Net::HTTP::Get.new("/go/properties/#{pipeline['name']}/latest/#{pipeline['stage']}/latest/#{pipeline['job']}/cruise_timestamp_06_completed")
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      req.basic_auth ENV['GO_USERNAME'], ENV['GO_PASSWORD']
-      response = http.request(req)
-      @body = response.body
-    end
-  end
-  
+def config
+  YAML.load(File.read('config.yml'))
 end
 
 get '/' do
-    erb :index, :locals => { :watchdog => GoWatchdog.new }
+    erb :index, :locals => { :watchdog => GoWatchdog.new(config) }
 end
 
 get '/time' do
-  osito = GoWatchdog.new
+  osito = GoWatchdog.new(config)
 <<-JAVASCRIPT
  $("#time_since_last_green_build").text('#{osito.time_since_last_green_build}');
  $('body').removeClass('happy neutral angry');
  $('body').addClass('#{osito.mood}');
 JAVASCRIPT
-end
-
-class Ago
-  def initialize(minutes)
-    @minutes = minutes
-  end
-  
-  def ago
-    Time.now - @minutes * 60
-  end
-end
-
-class Fixnum
-  def minutes
-    Ago.new(self)
-  end
 end
