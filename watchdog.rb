@@ -3,6 +3,7 @@ require 'net/http'
 require 'net/https'
 
 raise "Must supply Go password in env variable GO_PASSWORD" unless ENV['GO_PASSWORD']
+raise "Must supply Go username in env variable GO_USERNAME" unless ENV['GO_USERNAME']
 set :public_folder, File.dirname(__FILE__) + '/static'
 
 class GoWatchdog
@@ -41,11 +42,12 @@ class GoWatchdog
   
   def pipeline_timestamp
     @body ||= begin
-      http = Net::HTTP.new('go01.thoughtworks.com',443)
-      req = Net::HTTP::Get.new('/go/properties/GreenInstallers/latest/defaultStage/latest/defaultJob/cruise_timestamp_06_completed')
+      pipeline = YAML.load(File.read('config.yml'))['pipeline']
+      http = Net::HTTP.new(pipeline['host'], pipeline['port'])
+      req = Net::HTTP::Get.new("/go/properties/#{pipeline['name']}/latest/#{pipeline['stage']}/latest/#{pipeline['job']}/cruise_timestamp_06_completed")
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      req.basic_auth 'mingle_builder2', ENV['GO_PASSWORD']
+      req.basic_auth ENV['GO_USERNAME'], ENV['GO_PASSWORD']
       response = http.request(req)
       @body = response.body
     end
