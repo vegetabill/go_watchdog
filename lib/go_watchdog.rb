@@ -1,7 +1,10 @@
 require 'net/http'
 require 'net/https'
 
+require File.join(File.dirname(__FILE__), 'time_ago_in_words')
+
 class GoWatchdog
+  include TimeAgoInWords
   
   def initialize(config)
     @config = config
@@ -11,27 +14,7 @@ class GoWatchdog
   def time_since_last_green_build
     time_ago_in_words(last_green_build_time)
   end
-  
-  def last_green_build_time
-    value = pipeline_timestamp.strip.split("\n")[1]
-    DateTime.parse(value).to_time
-  end
-  
-  def minutes_ago(time)
-    (Time.now - time) / 60.0
-  end
-  
-  def time_ago_in_words(time)
-    minutes = minutes_ago(time)
-    if minutes  < 60.0
-      "#{minutes.ceil} minutes"
-    elsif (60..120).include?(minutes)
-      "about an hour"
-    else 
-      "#{(minutes/60.0).floor} hours"
-    end
-  end
-  
+    
   def mood
     minutes = minutes_ago(last_green_build_time)
     mood_cutoffs_in_minutes = @config['mood_cutoffs_in_minutes']
@@ -39,8 +22,10 @@ class GoWatchdog
     return "angry" if minutes > mood_cutoffs_in_minutes['angry']
     return "neutral" if minutes > mood_cutoffs_in_minutes['neutral']
     "happy"
-  end
+  end  
   
+  private
+
   def pipeline_timestamp
     @body ||= begin
       http_request
@@ -57,4 +42,10 @@ class GoWatchdog
     response = http.request(req)
     @body = response.body    
   end
+  
+  def last_green_build_time
+    value = pipeline_timestamp.strip.split("\n")[1]
+    DateTime.parse(value).to_time
+  end
+  
 end
