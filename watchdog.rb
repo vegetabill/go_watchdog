@@ -13,7 +13,7 @@ def config
 end
 
 get '/' do
-    erb :index, :locals => { :watchdog => GoWatchdog.new(config) }
+    erb :index
 end
 
 get '/time' do
