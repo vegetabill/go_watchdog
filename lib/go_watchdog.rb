@@ -1,6 +1,5 @@
-require 'net/http'
-require 'net/https'
-
+# -*- coding: utf-8 -*-
+require 'last_green_build_fetcher'
 require File.join(File.dirname(__FILE__), 'time_ago_in_words')
 
 class GoWatchdog
@@ -26,26 +25,16 @@ class GoWatchdog
   
   private
 
-  def pipeline_timestamp
-    @body ||= begin
-      http_request
-    end
-  end
-  
-  def http_request
-    http = Net::HTTP.new(@pipeline_config['host'], @pipeline_config['port'])
-    url = "/go/properties/#{@pipeline_config['name']}/latest/#{@pipeline_config['stage']}/latest/#{@pipeline_config['job']}/cruise_timestamp_06_completed"
-    req = Net::HTTP::Get.new(url)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    req.basic_auth ENV['GO_USERNAME'], ENV['GO_PASSWORD']
-    response = http.request(req)
-    @body = response.body    
-  end
-  
   def last_green_build_time
-    value = pipeline_timestamp.strip.split("\n")[1]
-    DateTime.parse(value).to_time
+    @last_green_build_time ||= begin
+      LastGreenBuildFetcher.new(:protocol => @pipeline_config['protocol'],
+                                  :host => @pipeline_config['host'],
+                                  :port => @pipeline_config['port'],
+                                  :username => ENV['GO_USERNAME'],
+                                  :password => ENV['GO_PASSWORD'],
+                                  :pipeline_name => @pipeline_config['name'],
+                                  :stage_name => @pipeline_config['stage']).fetch
+    end
   end
   
 end

@@ -1,12 +1,20 @@
+GIT
+  remote: https://github.com/rearadmiral/go-api-client.git
+  revision: 574b4fdbce7a93c5f1eea5730a7eb4bc01d1b2b0
+  specs:
+    go_api_client (0.2.0)
+      nokogiri
+
 GEM
   remote: https://rubygems.org/
   specs:
-    rack (1.4.1)
-    rack-protection (1.2.0)
+    nokogiri (1.5.6)
+    rack (1.5.2)
+    rack-protection (1.3.2)
       rack
-    sinatra (1.3.2)
-      rack (~> 1.3, >= 1.3.6)
-      rack-protection (~> 1.2)
+    sinatra (1.3.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.3)
       tilt (~> 1.3, >= 1.3.3)
     tilt (1.3.3)
 
@@ -14,4 +22,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  go_api_client!
   sinatra

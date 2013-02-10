@@ -1,12 +1,11 @@
 pipeline:
   name: GreenInstallers
   host: go01.thoughtworks.com
-  port: 443  
+  protocol: https
+  port: 443
   stage: defaultStage
-  job: defaultJob
 message: since last green installer
 mood_cutoffs_in_minutes:
   enraged: 1440
   angry: 1080
   neutral: 120
-  
