@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 require 'last_green_build_fetcher'
 require File.join(File.dirname(__FILE__), 'time_ago_in_words')
 
@@ -10,6 +9,10 @@ class GoWatchdog
     @pipeline_config = @config['pipeline']
   end
   
+  def any_updates?
+    last_green_build_time.is_a?(Time)
+  end
+
   def time_since_last_green_build
     time_ago_in_words(last_green_build_time)
   end
