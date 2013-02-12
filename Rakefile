@@ -1,6 +1,10 @@
 require 'rake/testtask'
 
-task :default => :test
+task :default => [:quiet, :test]
+
+task :quiet do 
+  ENV['QUIET'] = 'true'
+end
 
 Rake::TestTask.new do |t|
   t.libs << "test"
