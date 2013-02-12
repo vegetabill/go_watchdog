@@ -8,14 +8,20 @@ require 'ostruct'
 class LastGreenBuilderFetcherTest < Test::Unit::TestCase
   
   def test_fetching_finds_most_recent_passing_stage
-    mock_pipeline = OpenStruct.new
-    mock_stage1 = OpenStruct.new(:name => 'unit', :result => 'Passed', :completed_at => Time.parse('2013-02-11 14:10:00'))
-    mock_stage2 = OpenStruct.new(:name => 'acceptance', :result => 'Passed', :completed_at => Time.parse('2013-02-11 14:19:00'))
-    mock_pipeline.stages = [mock_stage1, mock_stage2]
-    with_go_api_client_returning({:pipelines => [mock_pipeline], :latest_atom_entry_id => 'ignore'}) do
+    mock_pipeline1 = OpenStruct.new
+      passing_units = OpenStruct.new(:name => 'unit', :result => 'Passed', :completed_at => Time.parse('2013-02-10 11:40:00'))
+      failing_acceptance = OpenStruct.new(:name => 'acceptance', :result => 'Failed', :completed_at => Time.parse('2013-02-10 11:45:00'))
+    mock_pipeline1.stages = [passing_units, failing_acceptance]
+    
+    mock_pipeline2 = OpenStruct.new
+      passing_units = OpenStruct.new(:name => 'unit', :result => 'Passed', :completed_at => Time.parse('2013-02-11 14:10:00'))
+      passing_acceptance = OpenStruct.new(:name => 'acceptance', :result => 'Passed', :completed_at => Time.parse('2013-02-11 14:19:00'))
+    mock_pipeline2.stages = [passing_units, passing_acceptance]
+    
+    with_go_api_client_returning({:pipelines => [mock_pipeline1, mock_pipeline2].reverse, :latest_atom_entry_id => 'ignore'}) do
       fetcher = LastGreenBuildFetcher.new({:stage_name => 'acceptance'})
-      t = fetcher.fetch
-      assert_equal Time.parse('2013-02-11 14:19:00'), t
+      last_green_build_time = fetcher.fetch
+      assert_equal passing_acceptance.completed_at, last_green_build_time
     end
   end
 
