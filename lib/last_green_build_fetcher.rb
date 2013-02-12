@@ -6,6 +6,10 @@ class LastGreenBuildFetcher
   
   @@latest_atom_entry_id = nil
 
+  def self.latest_atom_entry_id
+    @@latest_atom_entry_id
+  end
+
   def initialize(options)
     @stage = options.delete(:stage_name)
     @options = options.merge(:latest_atom_entry_id => @@latest_atom_entry_id) if @@latest_atom_entry_id
