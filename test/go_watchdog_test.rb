@@ -20,13 +20,6 @@ class GoWatchdogTest < Test::Unit::TestCase
     end
   end
 
-  def test_when_fetcher_returns_nil_knows_there_are_no_updates
-    with_stub_fetcher_that_returns(nil) do
-      osito = GoWatchdog.new(simple_config)
-      assert_equal false, osito.any_updates?
-    end
-  end
-
   def test_time_since_last_green_build
     with_stub_fetcher_that_returns(Time.now - (60 * 75)) do
       osito = GoWatchdog.new(simple_config)

@@ -17,16 +17,15 @@ class LastGreenBuildFetcher
   
   def fetch
     feed = GoApiClient.runs(@options)
+    
     pipelines = feed[:pipelines]
     @@latest_atom_entry_id = feed[:latest_atom_entry_id]
     puts "Checking for last green run of #{@stage}. Latest event: #{@@latest_atom_entry_id}" if ENV['DEBUG']
-
-    return nil if pipelines.empty?
     pipelines.reverse.each do |pipeline|
       stage = pipeline.stages.find { |stage| stage.name == @stage }
       return stage.completed_at if stage && stage.result == 'Passed'
     end
-    nil
+    false
   end
   
 end
