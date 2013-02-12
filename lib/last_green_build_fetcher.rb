@@ -11,8 +11,13 @@ class LastGreenBuildFetcher
   end
 
   def initialize(options)
-    @stage = options.delete(:stage_name)
-    @options = options.merge(:latest_atom_entry_id => @@latest_atom_entry_id) if @@latest_atom_entry_id
+    @options = options
+    @stage = @options.delete(:stage_name)
+    if @@latest_atom_entry_id
+      @options.merge!(:latest_atom_entry_id => @@latest_atom_entry_id)
+    else
+      puts "Retrieving the feed for #{@options[:pipeline_name]}-#{@stage} for the first time.  This could take quite awhile for pipelines with lots of history."
+    end
   end
   
   def fetch
