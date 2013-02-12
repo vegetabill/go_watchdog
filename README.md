@@ -1,7 +1,7 @@
 Go Watchdog
 ===========
 
-This uses the [Go](http://www.thoughtworks-studios.com/go-continuous-delivery) event feed to check the last completion time of a green run of a particular pipeline and the longer it has been, the watchdog image will get angrier.
+This uses the [Go](http://www.thoughtworks-studios.com/go-continuous-delivery) event feed to check the last completion time of a green run of a particular pipeline. The longer it has been since a green build, the angrier the watchdog will appear.
 
 I use it to monitor Mingle's Green Installer pipeline.
 
@@ -9,16 +9,19 @@ I use it to monitor Mingle's Green Installer pipeline.
 Setup
 =====
 
-I used Ruby 1.9.3.
+    > rvm use --create 1.9.3@go_watchdog
 
-I use bundler to manage the dependencies so 'gem install bundler' and then 'bundle' to install the watchdog's dependencies.
+    > gem install bundler
+  
+    > bundle
+
 
 To configure the pipeline, change config.yml to point to the pipeline you want the watchdog to watch. 
 
 You can also adjust the timing of the moods.  Right now, he starts off happy, then at 2 hours becomes neutral.  At 24 hours he becomes angry and then at 36 hours he becomes enraged.
 
-Then:
+Then to fire it up:
 
-GO_USERNAME=go GO_PASSWORD=1234 ruby watchdog.db
+    > GO_USERNAME=go GO_PASSWORD=1234 ruby watchdog.db
 
-Put http://localhost:4567/ up on an information radiator.
+Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
