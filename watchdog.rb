@@ -18,9 +18,13 @@ end
 
 get '/time' do
   osito = GoWatchdog.new(config)
-  <<-JAVASCRIPT
-   $("#time_since_last_green_build").text('#{osito.time_since_last_green_build}');
-   $('body').removeClass('happy neutral angry');
-   $('body').addClass('#{osito.mood}');
-  JAVASCRIPT
+  if osito.any_updates?
+    <<-JAVASCRIPT
+     $("#time_since_last_green_build").text('#{osito.time_since_last_green_build}');
+     $('body').removeClass('happy neutral angry');
+     $('body').addClass('#{osito.mood}');
+    JAVASCRIPT
+  else
+    'false;'
+  end
 end

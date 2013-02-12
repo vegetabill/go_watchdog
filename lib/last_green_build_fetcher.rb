@@ -14,7 +14,9 @@ class LastGreenBuildFetcher
     @options = options
     @stage = @options.delete(:stage_name)
     @options.merge!(:latest_atom_entry_id => recall_latest_atom_entry_id(@options))
-    puts "Retrieving the feed for #{@options[:pipeline_name]}-#{@stage} for the first time.  This could take quite awhile for pipelines with lots of history." unless ENV['QUIET']
+    if @options[:latest_atom_entry_id].nil? && ENV['QUIET'].nil?
+      puts "Retrieving the feed for #{@options[:pipeline_name]}-#{@stage} for the first time.  This could take quite awhile for pipelines with lots of history."
+    end
   end
   
   def fetch
