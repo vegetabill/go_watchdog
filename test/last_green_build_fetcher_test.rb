@@ -24,6 +24,17 @@ class LastGreenBuilderFetcherTest < Test::Unit::TestCase
       assert_equal passing_acceptance.completed_at, last_green_build_time
     end
   end
+  
+  def test_fetch_with_no_green_builds_returns_false
+    failing_pipeline = OpenStruct.new
+      passing_units = OpenStruct.new(:name => 'unit', :result => 'Passed', :completed_at => Time.parse('2013-02-10 11:40:00'))
+      failing_acceptance = OpenStruct.new(:name => 'acceptance', :result => 'Failed', :completed_at => Time.parse('2013-02-10 11:45:00'))
+    failing_pipeline.stages = [passing_units, failing_acceptance]
+    with_go_api_client_returning({:pipelines => [failing_pipeline], :latest_atom_entry_id => 'ignore'}) do
+      fetcher = LastGreenBuildFetcher.new({:stage_name => 'acceptance'})
+      assert_equal false, fetcher.fetch
+    end
+  end
 
   def test_fetching_sets_latest_atom_entry_id
     with_go_api_client_returning({:pipelines => [], :latest_atom_entry_id => 'ABC123'}) do
