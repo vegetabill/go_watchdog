@@ -1,7 +1,6 @@
 $LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'test/unit'
 require 'mocha/setup'
-require 'go_watchdog'
 require 'last_green_build_fetcher'
 require 'ostruct'
 

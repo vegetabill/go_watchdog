@@ -1,11 +1,7 @@
-module TimeAgoInWords
+module TimeAgo
   
-  def minutes_ago(time)
-    (now - time) / 60.0
-  end
-  
-  def time_ago_in_words(time)
-    minutes = minutes_ago(time)
+  def self.in_words(time)
+    minutes = TimeAgo::in_minutes(time)
     if minutes < 60.0
       "#{minutes.ceil} minutes"
     elsif (60..120).include?(minutes)
@@ -15,7 +11,11 @@ module TimeAgoInWords
     end
   end
   
-  def now
+  def self.in_minutes(time)
+    (TimeAgo::now - time) / 60.0
+  end
+  
+  def self.now
     Time.now
   end
   
