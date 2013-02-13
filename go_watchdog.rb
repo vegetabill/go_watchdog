@@ -13,11 +13,11 @@ get '/' do
 end
 
 get '/time' do
-  time = TimeAgo::in_words last_green_build_time
-  mood = ImpatientWatchdog.new(config).mood :waiting_since => last_green_build_time
-  <<-JAVASCRIPT
-   $("#time_since_last_green_build").text('#{time}');
-   $('body').removeClass('happy neutral angry');
-   $('body').addClass('#{mood}');
-  JAVASCRIPT
+  content_type 'application/json'
+  %s[
+    {
+      time: '#{TimeAgo::in_words(last_green_build_time)}',
+      mood: '#{ImpatientWatchdog.new(config).mood(:waiting_since => last_green_build_time)}'
+    }
+  ]
 end

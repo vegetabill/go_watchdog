@@ -2,6 +2,8 @@ require 'time_ago'
 
 class ImpatientWatchdog
   
+  MOODS = %w[happy neutral angry enraged]
+  
   def initialize(config)
     @mood_cutoffs_in_minutes = config['mood_cutoffs_in_minutes']
   end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Woof! - Go Watchdog</title>
+    <title>¡Guau guau! - Go Watchdog</title>
     <link rel="stylesheet" type="text/css" href="watchdog.css" />
     <link href='http://fonts.googleapis.com/css?family=Gorditas' rel='stylesheet' type='text/css'>
   </head>
@@ -24,7 +24,11 @@
         setInterval(function() {
           $.ajax({
               url: "/time",
-              success: function(js) { eval(js); }
+              success: function(data) {
+                $("#time_since_last_green_build").text(data.time);
+                $('body').removeClass('#{ImpatientWatchdog::MOODS.join(" ")}');
+                $('body').addClass(data.mood);
+              }
             });
         }, 10000);
       });
