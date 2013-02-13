@@ -2,7 +2,7 @@ require 'sinatra'
 $LOAD_PATH << 'lib'
 require 'go_watchdog_helper'
 require 'impatient_watchdog'
-require 'time_ago_in_words'
+require 'time_ago'
 
 set :public_folder, File.dirname(__FILE__) + '/static'
 
