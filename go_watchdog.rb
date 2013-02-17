@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 $LOAD_PATH << 'lib'
 require 'go_watchdog_helper'
 require 'impatient_watchdog'
@@ -13,11 +14,7 @@ get '/' do
 end
 
 get '/time' do
-  content_type 'application/json'
-  %s[
-    {
-      time: '#{TimeAgo::in_words(last_green_build_time)}',
-      mood: '#{ImpatientWatchdog.new(config).mood(:waiting_since => last_green_build_time)}'
-    }
-  ]
+  content_type :json
+  { 'time' =>  TimeAgo::in_words(last_green_build_time),
+    'mood' => ImpatientWatchdog.new(config).mood(:waiting_since => last_green_build_time) }.to_json
 end

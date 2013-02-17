@@ -2,6 +2,7 @@ require 'bundler'
 Bundler.setup
 require 'go_api_client'
 require 'pstore'
+require 'benchmark'
 
 class LastGreenBuildFetcher
   
@@ -16,7 +17,11 @@ class LastGreenBuildFetcher
   end
   
   def fetch
-    feed = GoApiClient.runs(@options)
+    feed = nil
+    ms = Benchmark.realtime do
+      feed = GoApiClient.runs(@options)
+    end
+    puts "fetched pipeline runs in #{ms/1000}sec" unless ENV['QUIET']
 
     pipelines = feed[:pipelines]
     remember(:latest_atom_entry_id, feed[:latest_atom_entry_id])

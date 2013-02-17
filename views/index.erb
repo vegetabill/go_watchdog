@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>¡Guau guau! - Go Watchdog</title>
+    <title>Go Watchdog - ¡Guau guau!</title>
     <link rel="stylesheet" type="text/css" href="watchdog.css" />
     <link href='http://fonts.googleapis.com/css?family=Gorditas' rel='stylesheet' type='text/css'>
   </head>
@@ -26,7 +26,7 @@
               url: "/time",
               success: function(data) {
                 $("#time_since_last_green_build").text(data.time);
-                $('body').removeClass('#{ImpatientWatchdog::MOODS.join(" ")}');
+                $('body').removeClass('<%= ImpatientWatchdog::MOODS.join(" ") %>');
                 $('body').addClass(data.mood);
               }
             });
