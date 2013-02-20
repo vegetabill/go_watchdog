@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/ThoughtWorksInc/go-api-client.git
-  revision: 5adc66e1664545d7dd626a0d298cdd2aef66bfe6
+  remote: https://github.com/rearadmiral/go-api-client.git
+  revision: 574b4fdbce7a93c5f1eea5730a7eb4bc01d1b2b0
   specs:
-    go_api_client (0.3.0)
+    go_api_client (0.2.0)
       nokogiri
 
 GEM
