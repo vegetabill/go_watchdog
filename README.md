@@ -25,3 +25,5 @@ Then to fire it up:
     > GO_USERNAME=go GO_PASSWORD=1234 ruby go_watchdog.rb
 
 Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
+
+If things aren't what they seem, try deleting the .go_watchdog_cache file.
