@@ -5,9 +5,10 @@ require 'pstore'
 require 'benchmark'
 
 class LastGreenBuildFetcher
-  
+
   def initialize(options)
     @options = options
+    @pipeline = @options[:pipeline_name]
     @stage = @options.delete(:stage_name)
     @cache = PStore.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '.go_watchdog_cache')))
     @options.merge!(:latest_atom_entry_id => recall(:latest_atom_entry_id))
@@ -15,7 +16,7 @@ class LastGreenBuildFetcher
       puts "Retrieving the feed for #{@options[:pipeline_name]}-#{@stage} for the first time.  This could take quite awhile for pipelines with lots of history."
     end
   end
-  
+
   def fetch
     feed = nil
     ms = Benchmark.realtime do
@@ -36,18 +37,22 @@ class LastGreenBuildFetcher
 
     recall :latest_green_build_time
   end
-  
+
   private
 
   def remember(key, value)
     @cache.transaction do
-      @cache[key] = value
-    end  
+      if @cache[@pipeline]
+        @cache[@pipeline].merge!(key => value)
+      else
+        @cache[@pipeline] = { key => value }
+      end
+    end
   end
 
   def recall(key)
     @cache.transaction(true) do
-      @cache[key]
+      @cache[@pipeline] && @cache[@pipeline][key]
     end
   end
 end
