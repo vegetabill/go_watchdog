@@ -1,0 +1,11 @@
+pipeline:
+  name: pipeline
+  host: go-server.your-company.com
+  protocol: https
+  port: 443
+  stage: deploy
+message: since last deploy
+mood_cutoffs_in_minutes:
+  enraged: 1440
+  angry: 1080
+  neutral: 120
