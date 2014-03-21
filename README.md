@@ -12,16 +12,16 @@ Setup
     > rvm use --create 1.9.3@go_watchdog
 
     > gem install bundler
-  
+
     > bundle
 
 
-To configure the pipeline, change config.yml to point to the pipeline you want the watchdog to watch. 
+To configure the pipeline, change config.yml to point to the pipeline you want the watchdog to watch.
 
 You can also adjust the timing of the moods.  Right now, he starts off happy, then at 2 hours becomes neutral.  At 24 hours he becomes angry and then at 36 hours he becomes enraged.
 
 Then to fire it up:
 
-    > GO_USERNAME=go GO_PASSWORD=1234 ruby go_watchdog.db
+    > GO_USERNAME=go GO_PASSWORD=1234 ruby go_watchdog.rb
 
 Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
