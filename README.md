@@ -15,6 +15,7 @@ Setup
 
     > bundle
 
+    > mv config.yml{.example,}
 
 To configure the pipeline, change config.yml to point to the pipeline you want the watchdog to watch.
 
