@@ -23,7 +23,7 @@ You can also adjust the timing of the moods.  Right now, he starts off happy, th
 
 Then to fire it up:
 
-    > GO_USERNAME=go GO_PASSWORD=1234 ruby go_watchdog.rb
+    > GO_USERNAME=go GO_PASSWORD=1234 rackup -p 4567
 
 Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
 
