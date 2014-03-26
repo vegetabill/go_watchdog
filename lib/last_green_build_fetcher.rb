@@ -13,7 +13,7 @@ class LastGreenBuildFetcher
     @cache = PStore.new(File.expand_path(File.join(File.dirname(__FILE__), '..', '.go_watchdog_cache')))
     @options.merge!(:latest_atom_entry_id => recall(:latest_atom_entry_id))
     if @options[:latest_atom_entry_id].nil? && ENV['QUIET'].nil?
-      puts "Retrieving the feed for #{@options[:pipeline_name]}-#{@stage} for the first time.  This could take quite awhile for pipelines with lots of history."
+      puts "Retrieving the feed for #{@options[:pipeline_name]}/#{@stage} for the first time.  This could take quite awhile for pipelines with lots of history."
     end
   end
 
