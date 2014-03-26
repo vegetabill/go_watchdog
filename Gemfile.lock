@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/ThoughtWorksInc/go-api-client.git
-  revision: 574b4fdbce7a93c5f1eea5730a7eb4bc01d1b2b0
+  remote: https://github.com/rearadmiral/go-api-client.git
+  revision: 49cabeaa77c32cb4993f8a2fc0fd770c60a3bdf3
   branch: master
   specs:
     go_api_client (0.2.0)
