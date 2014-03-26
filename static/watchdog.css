@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: 'Gorditas', cursive;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .enraged {
@@ -29,14 +30,14 @@ body {
 
 h1 {
   text-shadow: 3px 3px black;
-  font-size: 128px;
+  font-size: 256px;
   padding-bottom: -65px;
   margin: 20px 0px -25px 0px;
 }
 
 h2 {
   text-shadow: 3px 3px black;
-  font-size: 64px; 
+  font-size: 100px;
 }
 
 .footer {
@@ -48,8 +49,9 @@ h2 {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;  
+  right: 0;
   font-weight: bold;
+  font-size: 24px;
   text-align: right;
   padding: 2px 20px 2px 0px;
 }
