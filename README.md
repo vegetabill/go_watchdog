@@ -1,9 +1,9 @@
 Go Watchdog
 ===========
 
-This uses the [Go](http://www.thoughtworks-studios.com/go-continuous-delivery) event feed to check the last completion time of a green run of a particular pipeline. The longer it has been since a green build, the angrier the watchdog will appear.
+This uses the awesome open-source build and deploy server, [Go](http://www.go.cd), and its event feed to check the last completion time of a green run of a particular pipeline. The longer it has been since a green build, the angrier the watchdog will appear.
 
-I use it to monitor Mingle's Green Installer pipeline.
+I use it to monitor [Mingle's](http://getmingle.io) last deploy to staging pipeline.
 
 
 Setup
