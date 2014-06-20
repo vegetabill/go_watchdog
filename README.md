@@ -3,19 +3,21 @@ Go Watchdog
 
 This uses the awesome open-source build and deploy server, [Go](http://www.go.cd), and its event feed to check the last completion time of a green run of a particular pipeline. The longer it has been since a green build, the angrier the watchdog will appear.
 
+![The watchdog in action](https://pbs.twimg.com/media/BqXIQqeCQAA7kk0.jpg "Go Watchdog watching over the getmingle.io pipeline")
+
 I use it to monitor [Mingle's](http://getmingle.io) last deploy to staging pipeline.
 
 
 Setup
 =====
 
-    > rvm use --create 1.9.3@go_watchdog
+This assumes you're using [rbenv](https://github.com/sstephenson/rbenv)
 
     > gem install bundler
 
     > bundle
 
-    > mv config.yml{.example,}
+    > cp config.yml{.example,}
 
 To configure the pipeline, change config.yml to point to the pipeline you want the watchdog to watch.
 
