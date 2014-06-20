@@ -1,7 +1,7 @@
 Go Watchdog
 ===========
 
-This uses the awesome open-source build and deploy server, [Go.CD](http://www.go.cd), and its event feed to check the last completion time of a green run of a particular pipeline. The longer it has been since a green build, the angrier the watchdog will appear.
+This information radiator watches event feed for the awesome open-source build and deploy server, [Go.CD](http://www.go.cd).  The longer it has been since a green build, the angrier the watchdog will appear.
 
 ![The watchdog in action](https://pbs.twimg.com/media/BqXIQqeCQAA7kk0.jpg "Go Watchdog watching over the getmingle.io pipeline")
 
