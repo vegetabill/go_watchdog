@@ -3,7 +3,7 @@ Go Watchdog
 
 This information radiator watches the event feed for the awesome open-source build and deploy server, [Go.CD](http://www.go.cd).  The longer it has been since a green build, the angrier the watchdog will appear.
 
-![The watchdog in action](https://pbs.twimg.com/media/BqXIQqeCQAA7kk0.jpg "Go Watchdog watching over the getmingle.io pipeline")
+![The watchdog in action](https://pbs.twimg.com/media/BqXIQqeCQAA7kk0.jpg "Go Watchdog watching over Mingle's deployment pipeline. He's happy, for now...")
 
 I use it to monitor [Mingle's](http://getmingle.io) last deploy to staging pipeline.
 
