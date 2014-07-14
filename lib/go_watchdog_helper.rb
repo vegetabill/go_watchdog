@@ -19,7 +19,9 @@ module GoWatchdogHelper
                                         :password => ENV['GO_PASSWORD'],
                                         :pipeline_name => pipeline_config['name'],
                                         :stage_name => pipeline_config['stage'])
-    fetcher.fetch
+    fetcher.fetch.tap do |green_build|
+      return green_build.completed_at if green_build
+    end
   end
 
 end
