@@ -4,6 +4,8 @@ pipeline:
   protocol: https
   port: 443
   stage: deploy
+credentials:
+  username: jane.doe
 message: since last deploy
 mood_cutoffs_in_minutes:
   enraged: 1440

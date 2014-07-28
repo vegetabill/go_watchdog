@@ -17,7 +17,13 @@ class GoWatchdogApp < Sinatra::Base
   get '/time' do
     content_type :json
     { 'time' =>  TimeAgo::in_words(last_green_build_time),
-      'mood' => ImpatientWatchdog.new(config).mood(:waiting_since => last_green_build_time) }.to_json
+      'mood' => ImpatientWatchdog.new(watchdog_config).mood(:waiting_since => last_green_build_time) }.to_json
+  end
+
+  private
+
+  def watchdog_config
+    WATCHDOG_CONFIG
   end
 
 end

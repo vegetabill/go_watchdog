@@ -3,7 +3,7 @@ Go Watchdog
 
 This information radiator watches the event feed for the awesome open-source build and deploy server, [Go.CD](http://www.go.cd).  The longer it has been since a green build, the angrier the watchdog will appear.
 
-![The watchdog in action](example.png "Go Watchdog watching over Mingle's deployment pipeline. He's happy, for now...")
+![The watchdog in action](example.png "Go Watchdog watching over Mingle's deployment pipeline.")
 
 I use it to monitor [Mingle's](http://getmingle.io) last deploy to staging pipeline.
 
@@ -25,8 +25,8 @@ You can also adjust the timing of the moods.  Right now, he starts off happy, th
 
 Then to fire it up:
 
-    > GO_USERNAME=go GO_PASSWORD=1234 rackup -p 4567
+    > rackup
 
-Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
+Put [http://localhost:9292/](http://localhost:9292/) up on an information radiator.
 
-If things aren't what they seem, try deleting the .go_watchdog_cache file.
+If things aren't what they seem, try deleting the ~/.last-green-go-pipeline-cache folder.s
