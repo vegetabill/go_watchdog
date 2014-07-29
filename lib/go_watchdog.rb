@@ -1,14 +1,14 @@
 require 'sinatra'
 require 'json'
-$LOAD_PATH << 'lib'
-require 'go_watchdog_helper'
-require 'impatient_watchdog'
-require 'time_ago'
+
+require_relative 'go_watchdog_helper'
+require_relative 'impatient_watchdog'
 
 class GoWatchdogApp < Sinatra::Base
   include GoWatchdogHelper
 
-  set :public_folder, File.dirname(__FILE__) + '/static'
+  set :root, File.join(__dir__, '..')
+  set :public_folder, File.join(__dir__, '..', 'static')
 
   get '/' do
     erb :index
@@ -16,7 +16,7 @@ class GoWatchdogApp < Sinatra::Base
 
   get '/time' do
     content_type :json
-    { 'time' =>  TimeAgo::in_words(last_green_build_time),
+    { 'time' =>  last_green_build_time.iso8601,
       'mood' => ImpatientWatchdog.new(watchdog_config).mood(:waiting_since => last_green_build_time) }.to_json
   end
 

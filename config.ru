@@ -1,4 +1,4 @@
-require './go_watchdog.rb'
+require_relative 'lib/go_watchdog.rb'
 require 'highline/import'
 
 config = YAML.load(File.read('config.yml'))

@@ -1,13 +1,9 @@
-require 'rake/testtask'
+require 'rspec/core/rake_task'
 
-task :default => [:quiet, :test]
-
-task :quiet do 
+task :quiet do
   ENV['QUIET'] = 'true'
 end
 
-Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.test_files = FileList['test/*_test.rb']
-  t.verbose = true
-end
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => [:quiet, :spec]
