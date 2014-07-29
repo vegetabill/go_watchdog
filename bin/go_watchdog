@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+tempate = File.join(__dir__, '..', 'config.yml.example')
+config_file = File.join(ENV['HOME'], '.go_watchdog.yml')
+
+if File.exists?(config_file)
+  puts "[GoWatchdog] Using config from #{config_file}"
+else
+  FileUtils.cp template, config_file
+  puts "[GoWatchdog] Created config file at #{config_file}. Please customize and then re-run."
+  exit -1
+end
+
+`rackup`

@@ -6,9 +6,9 @@ module GoWatchdogHelper
   def last_green_build_time
     pipeline_config = watchdog_config['pipeline']
     auth_config = watchdog_config['credentials']
-    fetcher = GoCD::LastGreenBuildFetcher.new(:protocol => pipeline_config['protocol'],
+    fetcher = GoCD::LastGreenBuildFetcher.new(:protocol => pipeline_config['protocol'] || 'https',
                                         :host => pipeline_config['host'],
-                                        :port => pipeline_config['port'],
+                                        :port => pipeline_config['port'] || 443,
                                         :username => auth_config['username'],
                                         :password => auth_config['password'],
                                         :pipeline_name => pipeline_config['name'],

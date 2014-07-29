@@ -1,8 +1,6 @@
 pipeline:
   name: pipeline
   host: go-server.your-company.com
-  protocol: https
-  port: 443
   stage: deploy
 credentials:
   username: jane.doe
