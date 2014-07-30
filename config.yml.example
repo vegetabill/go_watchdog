@@ -5,7 +5,7 @@ pipeline:
 credentials:
   username: jane.doe
 message: since last deploy
-mood_cutoffs_in_minutes:
-  enraged: 1440
-  angry: 1080
-  neutral: 120
+mood_cutoffs_in_hours:
+  enraged: 4
+  angry: 2
+  neutral: 1
