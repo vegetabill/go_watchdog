@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["bill.dephillips@gmail.com"]
   s.licenses    = ['MIT']
   s.homepage    = "https://github.com/rearadmiral/go_watchdog"
-  s.summary     = "gets angrier the longer it's been since a green build"
+  s.summary     = "the watchdog angrier the longer it's been since a green build"
   s.description = "watches your Go.CD pipeline and changes status depending on time since last green build"
 
   s.add_runtime_dependency "last_green_go_pipeline", '~> 1.1'
