@@ -5,7 +5,7 @@ require 'bundler/version'
 
 Gem::Specification.new do |s|
   s.name        = "go_watchdog"
-  s.version     = "1.2.3"
+  s.version     = "1.2.4"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Bill DePhillips"]
   s.email       = ["bill.dephillips@gmail.com"]
