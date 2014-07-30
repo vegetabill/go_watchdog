@@ -3,7 +3,7 @@
 require 'fileutils'
 
 base_dir = File.expand_path(File.join(__dir__, '..'))
-template = , File.join(base_dir, 'config.yml.example')
+template = File.join(base_dir, 'config.yml.example')
 config_file = File.join(ENV['HOME'], '.go_watchdog.yml')
 
 if File.exists?(config_file)
@@ -15,4 +15,5 @@ else
 end
 
 )
+
 `rackup #{File.join(base_dir, 'config.ru')}`
