@@ -13,4 +13,4 @@ else
   exit -1
 end
 
-`rackup`
+`cd ${__dir__}; cd ..; rackup`
