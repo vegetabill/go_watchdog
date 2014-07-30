@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
 
   s.executables << 'go_watchdog'
 
-  s.files        = Dir.glob("{lib}/**/*") + %w(LICENSE README.md config.yml.example)
+  s.files        = Dir.glob("static/**/*") + Dir.glob("views/**/*") + Dir.glob("{lib}/**/*") + %w(LICENSE README.md config.yml.example)
   s.require_path = 'lib'
 end

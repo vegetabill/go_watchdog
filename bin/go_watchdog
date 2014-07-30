@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require_relative '../lib/go_watchdog.rb'
+require 'highline/import'
 
 base_dir = File.expand_path(File.join(__dir__, '..'))
 template = File.join(base_dir, 'config.yml.example')
@@ -14,6 +16,11 @@ else
   exit -1
 end
 
-)
+config = YAML.load(File.read(config_file))
+username = config['credentials']['username']
+host = config['pipeline']['host']
+config['credentials']['password'] ||= ask("enter password for #{username}@#{host}: ") { |prompt| prompt.echo = false }
 
-`rackup #{File.join(base_dir, 'config.ru')}`
+WATCHDOG_CONFIG = config
+
+GoWatchdogApp.run!

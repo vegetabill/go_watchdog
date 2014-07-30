@@ -11,22 +11,17 @@ I use it to monitor [Mingle's](http://getmingle.io) last deploy to staging pipel
 Setup
 =====
 
-This assumes you're using [rbenv](https://github.com/sstephenson/rbenv)
+    > gem install go_watchdog
 
-    > gem install bundler
+    > go_watchdog
 
-    > bundle
 
-    > cp config.yml{.example,}
+The first time it runs, it will generate an example config file that you must change to point to the pipeline you want the watchdog to watch.
 
-To configure the pipeline, change config.yml to point to the pipeline you want the watchdog to watch.
+Once you have the config the way you want, run it again.
 
-You can also adjust the timing of the moods.  Right now, he starts off happy, then at 2 hours becomes neutral.  At 24 hours he becomes angry and then at 36 hours he becomes enraged.
+    > go_watchdog
 
-Then to fire it up:
+Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
 
-    > rackup
-
-Put [http://localhost:9292/](http://localhost:9292/) up on an information radiator.
-
-If things aren't what they seem, try deleting the ~/.last-green-go-pipeline-cache folder.s
+If things aren't what they seem, try deleting the ~/.last-green-go-pipeline-cache folder.
