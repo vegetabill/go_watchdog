@@ -7,6 +7,10 @@ This information radiator watches the event feed for the awesome open-source bui
 
 I use it to monitor [Mingle's](http://getmingle.io) last deploy to staging pipeline.
 
+Snap CI build status:
+
+[![Build Status](https://snap-ci.com/rearadmiral/go_watchdog/branch/master/build_image)](https://snap-ci.com/rearadmiral/go_watchdog/branch/master)
+
 
 Setup
 =====
@@ -25,3 +29,9 @@ Once you have the config the way you want, run it again.
 Put [http://localhost:4567/](http://localhost:4567/) up on an information radiator.
 
 If things aren't what they seem, try deleting the ~/.last-green-go-pipeline-cache folder.
+
+
+Feedback
+========
+
+If you have any comments, complaints, or questions, please open a GitHub issue.
