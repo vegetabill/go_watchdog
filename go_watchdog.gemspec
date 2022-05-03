@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "last_green_go_pipeline", '~> 1.1'
   s.add_runtime_dependency "highline", '~> 1.6'
-  s.add_runtime_dependency "sinatra", '~> 1.4'
+  s.add_runtime_dependency "sinatra", '>= 1.4', '< 3.0'
 
   s.executables << 'go_watchdog'
 
